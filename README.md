@@ -1,4 +1,4 @@
-# Js2Coffee and coffe2js formatter
+# js2Coffee and coffee2js converter for sublime text 2
 #### [Sublime Text 2](http://www.sublimetext.com/2)
 
 ## About
@@ -16,7 +16,7 @@ Clone or download the files and copy them to your `Packages` folder. You can acc
 ctrl + shift + P and type `Format: js2Coffee`, or you can use the ctrl + alt + f keybinding.
 
 ## Customize
-You can define some options in the script `jsAndCoffee.py`
+You can define some options in the script `js2Coffee.py`
 
 ## Unit tests
  * python -m unittest TestjsCoffeeFunctions
