@@ -5,7 +5,7 @@
  
 import sublime, sublime_plugin, re, subprocess, jsCoffeeFunctions
 
-class jsCoffeeCommand(sublime_plugin.TextCommand):
+class js2coffeeCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         self.edit      = edit
         selectedRegion = self.view.sel()[0]
