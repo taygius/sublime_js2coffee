@@ -20,14 +20,18 @@ def prepareCoffee(string):
 
 def prepareJs(string):
     string = removeComments(string)
-    string = re.sub("var [A-z\d\,\s]+\n", '', string)
     string = re.sub("\n[\S\d\, ]+ = void 0;", '', string)
     string = string.strip(" \t\n\r")
     return string
 
+def prepareJsBefore(string):
+    string = prepareJs(string)
+    string = re.sub("(var[\w\s\,]+\;)(?:\b|\n|$)", '', string)
+    return string
+
 def js2coffee(string):
     p = Popen(['js2coffee', '-X'], stdin = PIPE, stdout = PIPE, stderr=PIPE)
-    stdout, stderr = p.communicate(prepareJs(string))
+    stdout, stderr = p.communicate(prepareJsBefore(string))
     return stdout, stderr 
 
 def removeComments(string):
