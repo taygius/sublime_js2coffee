@@ -2,37 +2,28 @@
 # Filename: jsCoffeeFunctions.py
 
 import re
-from subprocess import PIPE
-from subprocess import Popen
+from subprocess import PIPE, Popen
 
 def coffee2js(string):
-    string = prepareCoffee(string)
-    p = Popen(['coffee', "-ecb", string], stdin = PIPE, stdout = PIPE, stderr = PIPE)
+    p = Popen(['coffee', "-ecb", prepareCoffee(string)], stdin = PIPE, stdout = PIPE, stderr = PIPE)
     stdout, stderr = p.communicate()
     stdout = removeComments(stdout)
     return stdout, stderr
 
 def prepareCoffee(string):
     string = re.sub("[A-z\d]+ = undefined", '', string)
-    string = removeComments(string)
-    string = string.strip(" \t\n\r")
-    return string
+    return removeComments(string).strip(" \t\n\r")
 
 def prepareJs(string):
     string = removeComments(string)
-    string = re.sub("\n[\S\d\, ]+ = void 0;", '', string)
-    string = string.strip(" \t\n\r")
-    return string
+    return re.sub("\n[\S\d\, ]+ = void 0;", '', string).strip(" \t\n\r")
 
 def prepareJsBefore(string):
-    string = prepareJs(string)
-    string = re.sub("(var[\w\s\,]+\;)(?:\b|\n|$)", '', string)
-    return string
+    return re.sub("(var[\w\s\,]+\;)(?:\b|\n|$)", '', prepareJs(string))
 
 def js2coffee(string):
     p = Popen(['js2coffee', '-X'], stdin = PIPE, stdout = PIPE, stderr=PIPE)
-    stdout, stderr = p.communicate(prepareJsBefore(string))
-    return stdout, stderr 
+    return p.communicate(prepareJsBefore(string))
 
 def removeComments(string):
     return re.sub("//[\S\d\. ]+\n", '', string)
