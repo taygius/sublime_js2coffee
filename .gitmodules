@@ -1,0 +1,3 @@
+[submodule "SublimeExternalComand"]
+	path = SublimeExternalComand
+	url = git://github.com/technocoreai/SublimeExternalCommand.git
