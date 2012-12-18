@@ -4,6 +4,7 @@
 This plugin converts selection of js to coffeescript and coffee to javascript
 Just use `ctrl + alt + f`
 
+
 ## Installation
 Install npm and coffee with your package manager
 js2coffee npm plugin is needed too
@@ -16,6 +17,8 @@ ctrl + shift + P and type `Format: js2Coffee`, or you can use the ctrl + alt + f
 
 ## Unit tests
  * python -m unittest TestjsCoffeeFunctions
+
+PS. Windows not supported
 
 ## License
 
