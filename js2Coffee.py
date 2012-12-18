@@ -2,21 +2,21 @@ import sublime, sublime_plugin, jsCoffeeFunctions
 
 class js2coffeeCommand(sublime_plugin.TextCommand):
     def run(self, edit):
-        selectedRegion = self.view.sel()[0]
-        selectedString = self.view.substr(selectedRegion).encode('utf-8')
+        region = self.view.sel()[0]
+        string = self.view.substr(region).encode('utf-8')
 
-        jsString, stderr = jsCoffeeFunctions.coffee2js(selectedString)
+        javascript, stderr = jsCoffeeFunctions.coffee2js(string)
 
         if len(stderr) == 0:
-            self.view.replace(edit, selectedRegion, jsString) # replace selection with javascript
+            self.view.replace(edit, region, javascript) #replace selection with javascript
         else: # if not coffee
-            coffeeString, stderr = jsCoffeeFunctions.js2coffee(selectedString)
+            coffee, stderr = jsCoffeeFunctions.js2coffee(string)
             if len(stderr) == 0:
-                self.view.replace(edit, selectedRegion, coffeeString)
+                self.view.replace(edit, region, coffee)
             else: #if not js
                 self.show_error_panel(stderr)
 
-    # Error panel & fixup from external command
+    # Error panel from external command
     # https://github.com/technocoreai/SublimeExternalCommand
     def show_error_panel(self, stderr):
         panel = self.view.window().get_output_panel("js2coffee_errors")
