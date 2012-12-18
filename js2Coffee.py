@@ -2,7 +2,7 @@
 # @todo: check js or coffee
 # 4 spaces?
  
-import sublime, sublime_plugin
+import sublime, sublime_plugin, re
 import jsCoffeeFunctions
 
 class js2coffeeCommand(sublime_plugin.TextCommand):
@@ -36,4 +36,4 @@ class js2coffeeCommand(sublime_plugin.TextCommand):
         panel.end_edit(edit)
 
     def fixup(self, string):
-        return re.sub(r'\r\n|\r', '\n', string.decode('utf-8'))
+        return re.sub('(\r\n|\r)', '\n', string)
