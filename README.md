@@ -4,7 +4,6 @@
 This plugin converts selection of js to coffeescript and coffee to javascript
 Just use `ctrl + alt + f`
 
-
 ## Installation
 Install npm and coffee with your package manager
 js2coffee npm plugin is needed too
